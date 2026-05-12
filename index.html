@@ -183,37 +183,37 @@
 <!-- WORKS -->
 <section class="works" id="works">
   <div class="sec-label fi">— WORKS</div>
-  <h2 class="sec-title fi">制作実績</h2>
+  <h2 class="sec-title fi">制作例・作成例</h2>
   <div class="works-grid">
 
-    <div class="work-card fi" onclick="openModal('chat')">
+    <div class="work-card fi" onclick="location.href='chatbot.html'">
       <div class="work-thumb wt1">🤖</div>
       <div class="work-body">
         <div class="work-tags"><span class="wtag wt-ai">AI</span><span class="wtag wt-web">API連携</span></div>
         <div class="work-title">AIチャットボット</div>
         <div class="work-desc">Claude APIを活用したリアルタイム会話ボット。カスタムキャラクター・会話履歴保持機能つき。</div>
       </div>
-      <div class="work-footer"><span class="wstatus ws-done">● COMPLETED</span><span class="work-arrow">→</span></div>
+      <div class="work-footer"><span class="wstatus ws-done">● COMPLETED</span><span class="work-arrow" style="font-family:'Syne',sans-serif;font-size:11px;letter-spacing:1px;">デモを見る →</span></div>
     </div>
 
-    <div class="work-card fi2" onclick="openModal('lp')">
+    <div class="work-card fi2" onclick="location.href='cafe-lp.html'">
       <div class="work-thumb wt2">☕</div>
       <div class="work-body">
         <div class="work-tags"><span class="wtag wt-web">Web制作</span><span class="wtag wt-design">デザイン</span></div>
         <div class="work-title">カフェ LP「MOKU」</div>
         <div class="work-desc">架空カフェのランディングページ。スクロールアニメーション・レスポンシブ対応の高品質デザイン。</div>
       </div>
-      <div class="work-footer"><span class="wstatus ws-done">● COMPLETED</span><span class="work-arrow">→</span></div>
+      <div class="work-footer"><span class="wstatus ws-done">● COMPLETED</span><span class="work-arrow" style="font-family:'Syne',sans-serif;font-size:11px;letter-spacing:1px;">デモを見る →</span></div>
     </div>
 
-    <div class="work-card fi3" onclick="openModal('task')">
+    <div class="work-card fi3" onclick="location.href='task-app.html'">
       <div class="work-thumb wt3">📋</div>
       <div class="work-body">
         <div class="work-tags"><span class="wtag wt-ai">AI</span><span class="wtag wt-web">Webアプリ</span></div>
         <div class="work-title">AIタスク管理アプリ</div>
         <div class="work-desc">AIが優先度を自動提案するタスク管理ツール。CRUD操作・進捗管理・AI提案機能を実装。</div>
       </div>
-      <div class="work-footer"><span class="wstatus ws-done">● COMPLETED</span><span class="work-arrow">→</span></div>
+      <div class="work-footer"><span class="wstatus ws-done">● COMPLETED</span><span class="work-arrow" style="font-family:'Syne',sans-serif;font-size:11px;letter-spacing:1px;">デモを見る →</span></div>
     </div>
 
   </div>
@@ -228,7 +228,7 @@
     <p class="contact-desc fi">AIチャットボット・Webアプリ・LP制作など<br>お気軽にご相談ください。</p>
     <div class="contact-links fi2">
       <a href="https://twitter.com/" target="_blank" class="clink"><i class="ti ti-brand-twitter"></i> Twitter / X</a>
-      <a href="mailto:your@email.com" class="clink"><i class="ti ti-mail"></i> メール</a>
+      <a href="mailto:yusei.kawada.work@gmail.com" class="clink"><i class="ti ti-mail"></i> yusei.kawada.work@gmail.com</a>
       <a href="https://github.com/" target="_blank" class="clink"><i class="ti ti-brand-github"></i> GitHub</a>
     </div>
   </div>
@@ -236,7 +236,7 @@
 
 <footer>
   <div class="footer-logo">K.Y</div>
-  <div class="footer-copy">© 2025 Yusei Kawada. All rights reserved.</div>
+  <div class="footer-copy">© 2026 Yusei Kawada. All rights reserved.</div>
 </footer>
 
 <!-- MODAL -->
@@ -273,6 +273,8 @@
   };
 
   function openModal(key){
+  const links={chat:"chatbot.html",lp:"cafe-lp.html",task:"task-app.html"};
+  // リンクはモーダル内ボタンで表示
     const w = works[key];
     document.getElementById('modalTitle').textContent = w.title;
     document.getElementById('modalBody').innerHTML = `
