@@ -33,8 +33,9 @@
     .hero-cta{display:inline-flex;align-items:center;gap:16px;padding:16px 36px;border:0.5px solid var(--tan);color:var(--tan);font-family:'Jost',sans-serif;font-size:12px;letter-spacing:2px;text-decoration:none;transition:all 0.3s;cursor:pointer;background:transparent;}
     .hero-cta:hover{background:var(--tan);color:var(--dark);}
     .hero-right{position:relative;overflow:hidden;background:var(--light);}
-    .hero-img{width:100%;height:100%;background:linear-gradient(160deg,#D4C4AE 0%,#BFA98E 40%,#8B7355 100%);display:flex;align-items:center;justify-content:center;position:relative;}
-    .hero-img::after{content:'☕';font-size:120px;opacity:0.15;position:absolute;bottom:60px;right:60px;}
+    .hero-img{width:100%;height:100%;position:relative;overflow:hidden;}
+    .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+    .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(196,168,130,0.15) 0%,transparent 60%);}
     .hero-badge{position:absolute;bottom:48px;left:-24px;background:var(--white);padding:20px 24px;border-left:3px solid var(--tan);box-shadow:0 8px 32px rgba(28,24,20,0.12);}
     .badge-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--brown);line-height:1;}
     .badge-text{font-size:11px;letter-spacing:2px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;}
@@ -110,10 +111,7 @@
   </div>
   <div class="hero-right">
     <div class="hero-img">
-      <div style="text-align:center;color:rgba(255,255,255,0.3);">
-        <div style="font-size:64px;margin-bottom:12px;">☕</div>
-        <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:3px;">PHOTO HERE</div>
-      </div>
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80&auto=format&fit=crop" alt="コーヒーショップの雰囲気" loading="lazy"/>
     </div>
     <div class="hero-badge">
       <div class="badge-num">2018</div>
