@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
-    :root{--bg:#0A090F;--bg2:#111019;--bg3:#1A1828;--bg4:#211F30;--c1:#7B5EA7;--c2:#C2506C;--c3:#E8925A;--text:#F0EEF8;--muted:#7A788F;--border:rgba(123,94,167,0.18);--success:#4CAF8A;--warn:#E8925A;--danger:#C2506C;}
+    :root{--bg:#0A090F;--bg2:#111019;--bg3:#1A1828;--bg4:#211F30;--c1:#7B5EA7;--c2:#C2506C;--c3:#E8925A;--text:#F0EEF8;--muted:#7A788F;--border:rgba(123,94,167,0.18);--success:#4CAF8A;--danger:#C2506C;}
     body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;font-weight:300;min-height:100vh;display:flex;flex-direction:column;}
     nav{padding:18px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--border);background:rgba(10,9,15,0.9);backdrop-filter:blur(20px);position:fixed;top:0;left:0;right:0;z-index:100;}
     .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;text-decoration:none;}
@@ -18,66 +18,88 @@
     .page-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2px;color:var(--c1);font-family:'Syne',sans-serif;font-weight:600;margin-bottom:20px;padding:7px 16px;border:0.5px solid rgba(123,94,167,0.35);border-radius:20px;background:rgba(123,94,167,0.07);}
     .page-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,56px);letter-spacing:-1px;margin-bottom:12px;}
     .page-desc{font-size:14px;color:var(--muted);line-height:2;max-width:500px;margin:0 auto 40px;}
-    .app-wrap{max-width:860px;margin:0 auto;padding:0 24px 60px;flex:1;}
-    .app{display:grid;grid-template-columns:220px 1fr;border:0.5px solid var(--border);border-radius:16px;overflow:hidden;min-height:520px;}
+    .app-wrap{max-width:900px;margin:0 auto;padding:0 24px 60px;flex:1;width:100%;}
+    .app{display:grid;grid-template-columns:220px 1fr;border:0.5px solid var(--border);border-radius:16px;overflow:hidden;min-height:560px;}
     .sidebar{background:var(--bg2);padding:24px 0;border-right:0.5px solid var(--border);display:flex;flex-direction:column;}
     .sidebar-logo{padding:0 20px 20px;border-bottom:0.5px solid var(--border);margin-bottom:16px;}
     .logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;background:linear-gradient(135deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
     .logo-sub{font-size:10px;color:var(--muted);letter-spacing:2px;font-family:'Syne',sans-serif;}
     .sidebar-nav{flex:1;padding:0 12px;}
-    .nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background 0.15s;margin-bottom:2px;font-size:13px;color:var(--muted);}
-    .nav-item:hover{background:var(--bg3);}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background 0.15s;margin-bottom:2px;font-size:13px;color:var(--muted);user-select:none;}
+    .nav-item:hover{background:var(--bg3);color:var(--text);}
     .nav-item.active{background:rgba(123,94,167,0.15);color:var(--text);}
-    .nav-item i{font-size:16px;}
-    .nav-badge{margin-left:auto;background:var(--c1);color:white;font-size:10px;padding:2px 7px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;}
+    .nav-item i{font-size:16px;flex-shrink:0;}
+    .nav-badge{margin-left:auto;background:var(--c1);color:white;font-size:10px;padding:2px 7px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;min-width:20px;text-align:center;}
     .sidebar-stats{padding:16px 20px;border-top:0.5px solid var(--border);margin-top:auto;}
     .stat-row{display:flex;justify-content:space-between;margin-bottom:6px;}
     .stat-label{font-size:11px;color:var(--muted);}
     .stat-val{font-size:11px;font-family:'Syne',sans-serif;font-weight:700;}
     .progress-bar{height:3px;background:var(--bg4);border-radius:2px;margin-top:6px;}
     .progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width 0.5s;}
-    .main{background:var(--bg);display:flex;flex-direction:column;}
-    .main-header{padding:18px 22px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .main{background:var(--bg);display:flex;flex-direction:column;min-width:0;}
+    .main-header{padding:16px 22px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .header-left{display:flex;align-items:center;gap:10px;}
     .header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;}
+    .sort-select{background:var(--bg3);border:0.5px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--muted);font-size:11px;outline:none;cursor:pointer;font-family:'Syne',sans-serif;letter-spacing:0.5px;}
+    .sort-select:focus{border-color:var(--c1);}
     .btn-add{display:flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,var(--c1),var(--c2));border:none;border-radius:6px;color:white;font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:opacity 0.15s;}
     .btn-add:hover{opacity:0.85;}
     .input-area{padding:16px 22px;border-bottom:0.5px solid var(--border);background:var(--bg2);}
-    .input-row{display:flex;gap:10px;}
-    .task-input{flex:1;background:var(--bg3);border:0.5px solid var(--border);border-radius:8px;padding:9px 13px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+    .input-row{display:flex;gap:8px;flex-wrap:wrap;}
+    .task-input{flex:1;min-width:140px;background:var(--bg3);border:0.5px solid var(--border);border-radius:8px;padding:9px 13px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
     .task-input:focus{border-color:var(--c1);}
     .task-input::placeholder{color:var(--muted);}
-    select.task-select{background:var(--bg3);border:0.5px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:12px;outline:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;}
+    .task-select{background:var(--bg3);border:0.5px solid var(--border);border-radius:8px;padding:9px 10px;color:var(--text);font-size:12px;outline:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;}
+    .date-input{background:var(--bg3);border:0.5px solid var(--border);border-radius:8px;padding:9px 10px;color:var(--text);font-size:12px;outline:none;font-family:'Noto Sans JP',sans-serif;cursor:pointer;}
+    .date-input:focus{border-color:var(--c1);}
+    .date-input::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:pointer;}
     .ai-bar{margin-top:10px;padding:10px 13px;background:rgba(123,94,167,0.08);border:0.5px solid rgba(123,94,167,0.2);border-radius:8px;display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--muted);}
-    .ai-suggest{flex:1;}
     .ai-suggest strong{color:var(--c1);}
-    .ai-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
-    .ai-chip{padding:4px 10px;border-radius:12px;font-size:11px;cursor:pointer;border:0.5px solid var(--border);color:var(--muted);background:var(--bg3);transition:all 0.15s;font-family:'Syne',sans-serif;}
-    .ai-chip:hover{border-color:var(--c1);color:var(--text);}
-    .task-list{flex:1;padding:16px 22px;overflow-y:auto;max-height:300px;}
+    .task-list{flex:1;padding:16px 22px;overflow-y:auto;max-height:340px;}
     .list-lbl{font-size:10px;letter-spacing:3px;color:var(--muted);font-family:'Syne',sans-serif;font-weight:700;margin-bottom:10px;margin-top:4px;}
-    .task-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;background:var(--bg2);border:0.5px solid var(--border);margin-bottom:8px;transition:all 0.2s;}
+    .task-item{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:10px;background:var(--bg2);border:0.5px solid var(--border);margin-bottom:8px;transition:all 0.2s;}
     .task-item:hover{border-color:rgba(123,94,167,0.35);background:var(--bg3);}
-    .task-item.done{opacity:0.45;}
+    .task-item.done{opacity:0.4;}
     .task-item.done .task-name{text-decoration:line-through;color:var(--muted);}
-    .task-check{width:20px;height:20px;border-radius:6px;border:0.5px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;background:var(--bg3);}
+    .task-check{width:20px;height:20px;border-radius:6px;border:0.5px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;background:var(--bg3);margin-top:1px;}
     .task-check:hover{border-color:var(--c1);}
     .task-check.checked{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;}
     .task-check.checked i{color:white;font-size:12px;}
     .task-info{flex:1;min-width:0;}
-    .task-name{font-size:13px;font-weight:400;margin-bottom:3px;}
-    .task-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+    .task-name{font-size:13px;font-weight:400;margin-bottom:4px;line-height:1.5;}
+    .task-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
     .pbadge{font-size:10px;padding:2px 8px;border-radius:4px;font-family:'Syne',sans-serif;font-weight:700;letter-spacing:0.5px;}
     .p-high{background:rgba(194,80,108,0.15);color:#ED93B1;}
     .p-mid{background:rgba(232,146,90,0.15);color:#FAC775;}
     .p-low{background:rgba(91,155,213,0.15);color:#85B7EB;}
     .ai-badge{font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(123,94,167,0.15);color:#AFA9EC;font-family:'Syne',sans-serif;font-weight:600;}
     .task-cat{font-size:11px;color:var(--muted);}
-    .task-date{font-size:11px;color:var(--muted);margin-left:auto;flex-shrink:0;}
-    .task-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;padding:4px;border-radius:4px;transition:color 0.15s;flex-shrink:0;}
-    .task-del:hover{color:var(--danger);}
-    .empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px;}
-    .empty i{font-size:32px;margin-bottom:12px;display:block;opacity:0.4;}
-    .tech-wrap{max-width:860px;margin:0 auto;padding:0 24px 80px;}
+    .task-due{font-size:11px;color:var(--muted);display:inline-flex;align-items:center;gap:3px;}
+    .task-due.overdue{color:#ED93B1;}
+    .task-due.today-due{color:#FAC775;}
+    .task-actions{display:flex;gap:4px;flex-shrink:0;margin-top:1px;}
+    .task-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;padding:4px;border-radius:4px;transition:color 0.15s;}
+    .task-btn.edit-btn:hover{color:var(--c1);}
+    .task-btn.del-btn:hover{color:var(--danger);}
+    .empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:13px;}
+    .empty i{font-size:36px;margin-bottom:12px;display:block;opacity:0.3;}
+    .modal-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;}
+    .modal-overlay.open{display:flex;}
+    .modal{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;width:100%;max-width:440px;padding:24px;}
+    .modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;}
+    .modal-close{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px;border-radius:4px;transition:color 0.15s;}
+    .modal-close:hover{color:var(--text);}
+    .modal-field{margin-bottom:14px;}
+    .modal-label{font-size:11px;letter-spacing:1px;color:var(--muted);font-family:'Syne',sans-serif;font-weight:600;margin-bottom:6px;display:block;}
+    .modal-input{width:100%;background:var(--bg3);border:0.5px solid var(--border);border-radius:8px;padding:10px 13px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+    .modal-input:focus{border-color:var(--c1);}
+    .modal-select{width:100%;background:var(--bg3);border:0.5px solid var(--border);border-radius:8px;padding:10px 13px;color:var(--text);font-size:13px;outline:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;}
+    .modal-btns{display:flex;gap:10px;margin-top:20px;}
+    .btn-save{flex:1;padding:11px;background:linear-gradient(135deg,var(--c1),var(--c2));border:none;border-radius:8px;color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:opacity 0.15s;}
+    .btn-save:hover{opacity:0.85;}
+    .btn-cancel{padding:11px 20px;background:transparent;border:0.5px solid var(--border);border-radius:8px;color:var(--muted);font-family:'Syne',sans-serif;font-size:13px;cursor:pointer;transition:all 0.15s;}
+    .btn-cancel:hover{border-color:var(--c1);color:var(--text);}
+    .tech-wrap{max-width:900px;margin:0 auto;padding:0 24px 80px;width:100%;}
     .tech-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:28px;}
     .tech-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;color:var(--c1);margin-bottom:16px;}
     .tech-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
@@ -90,6 +112,7 @@
   </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="nav-logo">K.Y</a>
   <a href="index.html" class="nav-back"><i class="ti ti-arrow-left"></i> ポートフォリオに戻る</a>
@@ -109,10 +132,10 @@
         <div class="logo-sub">AI TASK MANAGER</div>
       </div>
       <div class="sidebar-nav">
-        <div class="nav-item active"><i class="ti ti-layout-dashboard"></i> すべて <span class="nav-badge" id="allBadge">0</span></div>
-        <div class="nav-item"><i class="ti ti-alert-circle"></i> 高優先度</div>
-        <div class="nav-item"><i class="ti ti-circle-check"></i> 完了済み</div>
-        <div class="nav-item"><i class="ti ti-calendar"></i> 今日</div>
+        <div class="nav-item active" onclick="setFilter('all')" id="tab-all"><i class="ti ti-layout-dashboard"></i> すべて <span class="nav-badge" id="badge-all">0</span></div>
+        <div class="nav-item" onclick="setFilter('high')" id="tab-high"><i class="ti ti-alert-circle"></i> 高優先度 <span class="nav-badge" id="badge-high">0</span></div>
+        <div class="nav-item" onclick="setFilter('done')" id="tab-done"><i class="ti ti-circle-check"></i> 完了済み <span class="nav-badge" id="badge-done">0</span></div>
+        <div class="nav-item" onclick="setFilter('today')" id="tab-today"><i class="ti ti-calendar"></i> 今日 <span class="nav-badge" id="badge-today">0</span></div>
       </div>
       <div class="sidebar-stats">
         <div class="stat-row"><span class="stat-label">完了率</span><span class="stat-val" id="progressLabel">0%</span></div>
@@ -120,32 +143,79 @@
         <div class="stat-row" style="margin-top:10px;"><span class="stat-label">残タスク</span><span class="stat-val" id="remainLabel">0</span></div>
       </div>
     </div>
+
     <div class="main">
       <div class="main-header">
-        <div class="header-title"><i class="ti ti-list-check" style="margin-right:8px;color:var(--c1);"></i>タスク一覧</div>
-        <button class="btn-add" onclick="addTask()"><i class="ti ti-plus"></i> 追加</button>
+        <div class="header-left">
+          <i class="ti ti-list-check" style="color:var(--c1);font-size:18px;"></i>
+          <div class="header-title" id="headerTitle">すべてのタスク</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <select class="sort-select" id="sortSelect" onchange="render()">
+            <option value="default">追加順</option>
+            <option value="priority">優先度順</option>
+            <option value="due">締め切り順</option>
+          </select>
+          <button class="btn-add" onclick="addTask()"><i class="ti ti-plus"></i> 追加</button>
+        </div>
       </div>
+
       <div class="input-area">
         <div class="input-row">
-          <input class="task-input" id="taskInput" placeholder="タスクを入力してください..." onkeydown="if(event.key==='Enter')addTask()" oninput="updateAI()"/>
+          <input class="task-input" id="taskInput" placeholder="タスクを入力..." onkeydown="if(event.key==='Enter')addTask()" oninput="updateAI()"/>
           <select class="task-select" id="catSelect">
             <option value="仕事">💼 仕事</option>
             <option value="学習">📚 学習</option>
             <option value="個人">🏠 個人</option>
             <option value="制作">🎨 制作</option>
           </select>
+          <input class="date-input" type="date" id="dueInput" title="締め切り日"/>
         </div>
         <div class="ai-bar">
           <span style="font-size:16px;">🤖</span>
           <div class="ai-suggest" id="aiText"><strong>AI提案：</strong> タスクを入力すると優先度を自動判定します</div>
         </div>
-        <div class="ai-chips">
-          <span class="ai-chip" onclick="quickAdd('ポートフォリオサイトを更新する')">📁 ポートフォリオ更新</span>
-          <span class="ai-chip" onclick="quickAdd('クライアントへの提案書を作成する')">📄 提案書作成</span>
-          <span class="ai-chip" onclick="quickAdd('APIの実装を完了させる')">⚡ API実装</span>
-        </div>
       </div>
+
       <div class="task-list" id="taskList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-title">
+      タスクを編集
+      <button class="modal-close" onclick="closeEdit()" aria-label="閉じる"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">タスク名</label>
+      <input class="modal-input" id="editName" placeholder="タスク名を入力"/>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">カテゴリ</label>
+      <select class="modal-select" id="editCat">
+        <option value="仕事">💼 仕事</option>
+        <option value="学習">📚 学習</option>
+        <option value="個人">🏠 個人</option>
+        <option value="制作">🎨 制作</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">優先度</label>
+      <select class="modal-select" id="editPriority">
+        <option value="high">🔴 HIGH（高優先度）</option>
+        <option value="mid">🟡 MID（中優先度）</option>
+        <option value="low">🔵 LOW（低優先度）</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">締め切り日</label>
+      <input class="modal-input" type="date" id="editDue"/>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeEdit()">キャンセル</button>
+      <button class="btn-save" onclick="saveEdit()">保存する</button>
     </div>
   </div>
 </div>
@@ -155,10 +225,11 @@
     <div class="tech-title">— 実装のポイント</div>
     <ul class="tech-list">
       <li>キーワード解析によるAI優先度自動判定（HIGH / MID / LOW）</li>
-      <li>タスクのCRUD操作（追加・完了チェック・削除）をJavaScriptで実装</li>
+      <li>左タブによるフィルタリング（全件・高優先度・完了済み・今日）</li>
+      <li>締め切り日の設定と期限切れ・当日のビジュアル警告</li>
+      <li>タスクの編集モーダル（名前・カテゴリ・優先度・締め切りを変更可能）</li>
+      <li>優先度順・締め切り順・追加順の並び替え機能</li>
       <li>完了率プログレスバーのリアルタイム更新</li>
-      <li>サイドバーに統計情報を表示するダッシュボードUI設計</li>
-      <li>クイック追加チップでワンクリック入力のUX向上</li>
     </ul>
   </div>
 </div>
@@ -169,50 +240,97 @@
 </footer>
 
 <script>
-let tasks=[
-  {id:1,name:'ポートフォリオのチャットボットを完成させる',cat:'制作',priority:'high',ai:true,done:false,date:'今日'},
-  {id:2,name:'Claude APIのドキュメントを読む',cat:'学習',priority:'mid',ai:true,done:false,date:'今日'},
-  {id:3,name:'ランサーズのプロフィールを更新する',cat:'仕事',priority:'low',ai:false,done:true,date:'昨日'},
+const TODAY = new Date().toISOString().split('T')[0];
+let tasks = [
+  {id:1,name:'Webサイトのレスポンシブ対応を完了させる',cat:'制作',priority:'high',ai:true,done:false,due:TODAY},
+  {id:2,name:'JavaScriptの非同期処理を勉強する',cat:'学習',priority:'mid',ai:true,done:false,due:''},
+  {id:3,name:'クライアントへの提案資料を作成する',cat:'仕事',priority:'high',ai:true,done:false,due:''},
+  {id:4,name:'GitHubのREADMEを更新する',cat:'制作',priority:'low',ai:false,done:true,due:''},
 ];
-let nextId=4;
+let nextId=5, currentFilter='all', editingId=null;
+
 const rules=[
   {kw:['締め切り','今日','急','緊急','至急'],p:'high'},
-  {kw:['提案','クライアント','納品','完成','リリース'],p:'high'},
-  {kw:['作成','実装','開発','制作','デザイン'],p:'mid'},
-  {kw:['読む','調べる','確認','チェック','更新'],p:'mid'},
+  {kw:['提案','クライアント','納品','完成','リリース','修正'],p:'high'},
+  {kw:['作成','実装','開発','制作','デザイン','対応'],p:'mid'},
+  {kw:['読む','調べる','確認','チェック','更新','勉強'],p:'mid'},
   {kw:['メモ','後で','いつか','検討'],p:'low'},
 ];
+
 function guess(t){for(const r of rules){if(r.kw.some(k=>t.includes(k)))return r.p;}return 'mid';}
 function pBadge(p){if(p==='high')return '<span class="pbadge p-high">HIGH</span>';if(p==='mid')return '<span class="pbadge p-mid">MID</span>';return '<span class="pbadge p-low">LOW</span>';}
+
+function dueBadge(due){
+  if(!due)return '';
+  const today=new Date();today.setHours(0,0,0,0);
+  const d=new Date(due);d.setHours(0,0,0,0);
+  const diff=Math.round((d-today)/86400000);
+  if(diff<0) return '<span class="task-due overdue"><i class="ti ti-clock" style="font-size:11px;"></i> 期限切れ</span>';
+  if(diff===0) return '<span class="task-due today-due"><i class="ti ti-clock" style="font-size:11px;"></i> 今日まで</span>';
+  return `<span class="task-due"><i class="ti ti-calendar" style="font-size:11px;"></i> ${due}</span>`;
+}
+
+function filterTasks(){
+  switch(currentFilter){
+    case 'high': return tasks.filter(t=>t.priority==='high'&&!t.done);
+    case 'done': return tasks.filter(t=>t.done);
+    case 'today': return tasks.filter(t=>t.due===TODAY&&!t.done);
+    default: return [...tasks];
+  }
+}
+
+function sortTasks(list){
+  const s=document.getElementById('sortSelect').value;
+  if(s==='priority'){const o={high:0,mid:1,low:2};return [...list].sort((a,b)=>o[a.priority]-o[b.priority]);}
+  if(s==='due'){return [...list].sort((a,b)=>{if(!a.due&&!b.due)return 0;if(!a.due)return 1;if(!b.due)return -1;return a.due.localeCompare(b.due);});}
+  return list;
+}
+
 function render(){
   const list=document.getElementById('taskList');
   list.innerHTML='';
-  const active=tasks.filter(t=>!t.done);
-  const done=tasks.filter(t=>t.done);
-  if(tasks.length===0){list.innerHTML='<div class="empty"><i class="ti ti-clipboard"></i>タスクを追加して始めましょう！<br>AIが優先度を自動提案します。</div>';updateStats();return;}
-  if(active.length){const l=document.createElement('div');l.className='list-lbl';l.textContent="TODAY'S TASKS";list.appendChild(l);active.forEach(t=>list.appendChild(makeItem(t)));}
-  if(done.length){const l=document.createElement('div');l.className='list-lbl';l.style.marginTop='16px';l.textContent='COMPLETED';list.appendChild(l);done.forEach(t=>list.appendChild(makeItem(t)));}
-  updateStats();
+  let filtered=sortTasks(filterTasks());
+  if(filtered.length===0){
+    list.innerHTML=`<div class="empty"><i class="ti ti-clipboard"></i>${currentFilter==='all'?'タスクを追加してみましょう！':'該当するタスクはありません。'}</div>`;
+  } else if(currentFilter==='all'){
+    const active=filtered.filter(t=>!t.done),done=filtered.filter(t=>t.done);
+    if(active.length){const l=document.createElement('div');l.className='list-lbl';l.textContent='ACTIVE TASKS';list.appendChild(l);active.forEach(t=>list.appendChild(makeItem(t)));}
+    if(done.length){const l=document.createElement('div');l.className='list-lbl';l.style.marginTop='16px';l.textContent='COMPLETED';list.appendChild(l);done.forEach(t=>list.appendChild(makeItem(t)));}
+  } else {
+    filtered.forEach(t=>list.appendChild(makeItem(t)));
+  }
+  updateStats();updateTabs();
 }
+
 function makeItem(t){
   const el=document.createElement('div');
   el.className='task-item'+(t.done?' done':'');
-  el.innerHTML=`<div class="task-check ${t.done?'checked':''}" onclick="toggle(${t.id})">${t.done?'<i class="ti ti-check"></i>':''}</div><div class="task-info"><div class="task-name">${t.name}</div><div class="task-meta">${pBadge(t.priority)}${t.ai?'<span class="ai-badge">🤖 AI提案</span>':''}<span class="task-cat">${t.cat}</span><span class="task-date">${t.date}</span></div></div><button class="task-del" onclick="del(${t.id})" aria-label="削除"><i class="ti ti-trash"></i></button>`;
+  el.innerHTML=`
+    <div class="task-check ${t.done?'checked':''}" onclick="toggle(${t.id})">${t.done?'<i class="ti ti-check"></i>':''}</div>
+    <div class="task-info">
+      <div class="task-name">${t.name}</div>
+      <div class="task-meta">${pBadge(t.priority)}${t.ai?'<span class="ai-badge">🤖 AI提案</span>':''}<span class="task-cat">${t.cat}</span>${dueBadge(t.due)}</div>
+    </div>
+    <div class="task-actions">
+      <button class="task-btn edit-btn" onclick="openEdit(${t.id})" aria-label="編集"><i class="ti ti-pencil"></i></button>
+      <button class="task-btn del-btn" onclick="del(${t.id})" aria-label="削除"><i class="ti ti-trash"></i></button>
+    </div>`;
   return el;
 }
+
 function toggle(id){const t=tasks.find(t=>t.id===id);if(t)t.done=!t.done;render();}
 function del(id){tasks=tasks.filter(t=>t.id!==id);render();}
+
 function addTask(){
   const input=document.getElementById('taskInput');
-  const cat=document.getElementById('catSelect').value;
   const name=input.value.trim();
   if(!name)return;
-  tasks.unshift({id:nextId++,name,cat,priority:guess(name),ai:true,done:false,date:'今日'});
-  input.value='';
+  tasks.unshift({id:nextId++,name,cat:document.getElementById('catSelect').value,priority:guess(name),ai:true,done:false,due:document.getElementById('dueInput').value});
+  input.value='';document.getElementById('dueInput').value='';
   document.getElementById('aiText').innerHTML='<strong>AI提案：</strong> タスクを入力すると優先度を自動判定します';
   render();
 }
-function quickAdd(t){document.getElementById('taskInput').value=t;updateAI();addTask();}
+
 function updateAI(){
   const v=document.getElementById('taskInput').value;
   if(!v){document.getElementById('aiText').innerHTML='<strong>AI提案：</strong> タスクを入力すると優先度を自動判定します';return;}
@@ -220,14 +338,54 @@ function updateAI(){
   const lb={high:'🔴 HIGH（高優先度）',mid:'🟡 MID（中優先度）',low:'🔵 LOW（低優先度）'};
   document.getElementById('aiText').innerHTML=`<strong>AI提案：</strong> このタスクの優先度は <strong style="color:var(--c1)">${lb[p]}</strong> と判定しました`;
 }
+
+function setFilter(f){
+  currentFilter=f;
+  const titles={all:'すべてのタスク',high:'高優先度タスク',done:'完了済みタスク',today:'今日のタスク'};
+  document.getElementById('headerTitle').textContent=titles[f];
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+f).classList.add('active');
+  render();
+}
+
+function updateTabs(){
+  document.getElementById('badge-all').textContent=tasks.length;
+  document.getElementById('badge-high').textContent=tasks.filter(t=>t.priority==='high'&&!t.done).length;
+  document.getElementById('badge-done').textContent=tasks.filter(t=>t.done).length;
+  document.getElementById('badge-today').textContent=tasks.filter(t=>t.due===TODAY&&!t.done).length;
+}
+
 function updateStats(){
   const total=tasks.length,done=tasks.filter(t=>t.done).length;
   const pct=total?Math.round(done/total*100):0;
   document.getElementById('progressLabel').textContent=pct+'%';
   document.getElementById('progressFill').style.width=pct+'%';
   document.getElementById('remainLabel').textContent=(total-done)+'件';
-  document.getElementById('allBadge').textContent=total;
 }
+
+function openEdit(id){
+  const t=tasks.find(t=>t.id===id);if(!t)return;
+  editingId=id;
+  document.getElementById('editName').value=t.name;
+  document.getElementById('editCat').value=t.cat;
+  document.getElementById('editPriority').value=t.priority;
+  document.getElementById('editDue').value=t.due||'';
+  document.getElementById('editModal').classList.add('open');
+}
+
+function closeEdit(){document.getElementById('editModal').classList.remove('open');editingId=null;}
+
+function saveEdit(){
+  const t=tasks.find(t=>t.id===editingId);if(!t)return;
+  t.name=document.getElementById('editName').value.trim()||t.name;
+  t.cat=document.getElementById('editCat').value;
+  t.priority=document.getElementById('editPriority').value;
+  t.due=document.getElementById('editDue').value;
+  t.ai=false;
+  closeEdit();render();
+}
+
+document.getElementById('editModal').addEventListener('click',function(e){if(e.target===this)closeEdit();});
 render();
 </script>
 </body>
