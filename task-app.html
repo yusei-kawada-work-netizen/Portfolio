@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TaskAI">
+  <meta name="theme-color" content="#7B5EA7">
+  <link rel="manifest" href="manifest.json">
   <title>AIタスク管理アプリ | Yusei Kawada</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -387,6 +393,15 @@ function saveEdit(){
 
 document.getElementById('editModal').addEventListener('click',function(e){if(e.target===this)closeEdit();});
 render();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/Portfolio/sw.js")
+      .then(reg => console.log("SW登録成功:", reg))
+      .catch(err => console.log("SW登録失敗:", err));
+  });
+}
 </script>
 </body>
 </html>
